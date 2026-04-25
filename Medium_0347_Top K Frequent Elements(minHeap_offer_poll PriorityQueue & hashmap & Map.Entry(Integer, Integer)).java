@@ -28,7 +28,7 @@ class Solution {
         }
         //STEP2:建立最小堆 (Min Heap)
         //為什麼用「最小堆」？ ==> 因為我們只需要保留「前 k 大」==>(堆顶永远是：当前最小频率) + (删除最小的) = 保留最大的 k 个元素
-        //                      <數字, 出現次數>                             依「出現次數」排序，但是"只"是讓"小"的在最前面（最小堆）
+        //                      <數字, 出現次數>                             依「出現次數」排序，但是"只"是讓"小"的在最前面(其他是任意排)
         PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(Comparator.comparingInt(Map.Entry::getValue));
         //Map.Entry就是"1"個「key + value」的物件，有2個方法
         //Map.Entry<Integer, Integer> e = (1,3)
