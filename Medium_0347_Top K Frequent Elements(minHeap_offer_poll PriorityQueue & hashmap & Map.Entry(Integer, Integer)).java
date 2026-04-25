@@ -245,4 +245,22 @@ PS:一步一步拆开看
 类名::new
 例子：ArrayList::new
 等价：() -> new ArrayList<>()
+(8)
+pq.stream():
+    可以理解为：把 pq 里的所有元素“拿出来准备处理”
+    元素类型是：Map.Entry<Integer, Integer>
+.mapToInt(Map.Entry::getKey)
+    把每个元素做“转换”==>(key, value) → key
+    同时：mapToInt 会把结果变成 int 流（IntStream）
+.toArray()
+    把流里"所有"的数据收集成"陣列"：int[]
+举个完整例子:
+假设 pq 里面是：
+            (1, 5)
+            (2, 3)
+            (3, 8)
+执行后：
+    stream → [Entry, Entry, Entry]
+    mapToInt → [1, 2, 3]
+    toArray → int[] {1, 2, 3}
 */
