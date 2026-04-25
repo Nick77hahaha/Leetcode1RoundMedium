@@ -27,8 +27,8 @@ class Solution {
             }
         }
         //STEP2:建立最小堆 (Min Heap)
-        //為什麼用「最小堆」？ ==> 因為我們只需要保留「前 k 大」
-        //              <數字, 出現次數>                                       依「出現次數」排序，而且是"小"的在前面（最小堆）
+        //為什麼用「最小堆」？ ==> 因為我們只需要保留「前 k 大」==>(堆顶永远是：当前最小频率) + (删除最小的) = 保留最大的 k 个元素
+        //                      <數字, 出現次數>                             依「出現次數」排序，而且是"小"的在前面（最小堆）
         PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(Comparator.comparingInt(Map.Entry::getValue));
         //Map.Entry就是"1"個「key + value」的物件，有2個方法
         //Map.Entry<Integer, Integer> e = (1,3)
@@ -47,6 +47,8 @@ class Solution {
     }
 }
 /*
+👉 Min Heap 的作用不是“找最小”
+👉 而是：快速淘汰最小的
 (1)PriorityQueue流程說明:
 🔵 第一個 e = (1,3)
 pq.offer((1,3));
@@ -184,4 +186,30 @@ A:PriorityQueue 可以存 (1,3),(2,2),(3,1)
    (1)先用 Map 統計次數
    (2)再丟進 PriorityQueue 排序
       [PriorityQueue 只能存「元素」，所以要存(key, value)]
+(4)
+🧩 用例子带你走一遍
+假设频率是：👉 我们要找 Top 3
+元素:  a   b   c   d   e
+频率:  5   3   2   8   6
+Step 1：加入 a(5)
+    [5]
+Step 2：加入 b(3)
+    [3, 5]   // 小顶堆，3在顶部
+Step 3：加入 c(2)
+    [2, 5, 3]
+Step 4：加入 d(8)
+    [2, 5, 3, 8]  // 超过 k=3
+    → 删除最小的 2
+    → 剩下 [3, 5, 8]
+Step 5：加入 e(6)
+    [3, 5, 8, 6]  // 超过 k
+    → 删除最小的 3
+    → 剩下 [5, 6, 8]
+✅ 最终结果
+    [5, 6, 8] → Top 3 最大频率
+(5)
+Q:為何在Step 3：加入 c(2)之後變成[2, 5, 3]而非[2, 3, 5]
+A:这是个很经典的误区：👉 你把 Heap 当成“排序数组”了 
+其实 PriorityQueue（堆）≠ 完全有序结构
+👉结论先说:[2, 5, 3] 和 [2, 3, 5]在 Heap 里都是合法的！
 */
