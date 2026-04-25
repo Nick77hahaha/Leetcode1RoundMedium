@@ -212,4 +212,37 @@ Q:為何在Step 3：加入 c(2)之後變成[2, 5, 3]而非[2, 3, 5]
 A:这是个很经典的误区：👉 你把 Heap 当成“排序数组”了 
 其实 PriorityQueue（堆）≠ 完全有序结构
 👉结论先说:[2, 5, 3] 和 [2, 3, 5]在 Heap 里都是合法的！
+(6)pq = new PriorityQueue<>(Comparator.comparingInt(Map.Entry::getValue));
+Q:pq原本是空的，但是後來加入的元素都會自動按照出現次數」排序?
+A:👉 不是“全部自动排序”，而是“始终维护堆顶是最小频率”
+
+PS:一步一步拆开看
+2️⃣ Comparator.comparingInt(...)
+    👉 创建一个“比较规则”（排序规则）
+    意思是：用某个 int 值来比较两个对象谁更小
+3️⃣ Map.Entry::getValue [类名::实例方法]
+    这是 方法引用（Method Reference），等价于：e -> e.getValue()
+    👉 也就是：拿 entry 的 value 来比较
+    👉:: 就是 方法引用（Method Reference），可以理解为Lambda 的简写形式
+(7)方法引用的 4 种常见形式
+1️⃣ 对象方法（你现在用的）
+类名::实例方法
+例子：
+    Map.Entry::getValue
+    String::length
+等价：
+    e -> e.getValue()
+    s -> s.length()
+2️⃣ 静态方法
+类名::静态方法
+例子：Integer::parseInt
+等价：s -> Integer.parseInt(s)
+3️⃣ 已有对象的方法
+对象::方法
+例子：System.out::println
+等价：x -> System.out.println(x)
+4️⃣ 构造方法
+类名::new
+例子：ArrayList::new
+等价：() -> new ArrayList<>()
 */
