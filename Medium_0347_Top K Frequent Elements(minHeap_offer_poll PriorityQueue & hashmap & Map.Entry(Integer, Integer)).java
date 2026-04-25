@@ -11,6 +11,7 @@ public class Main {
 //                                   K Closest Points
 //                               Top K Largest
 //幾乎都能套這個模板。
+//Min Heap + 限制大小 = 保留最大的 k 个元素
 //時間複雜度O(n x log k)，n是数组的长度
 //空间复杂度O(k)
 class Solution {
