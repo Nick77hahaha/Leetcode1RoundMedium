@@ -61,7 +61,7 @@ class LRUCache {
         if (cache.containsKey(key)) {
             Node node = cache.get(key);
             removeNode(node);
-            node.val = value;
+            node.val = value;//這個順序可以提到前面去沒問題
             addToHead(node);
         } else {//假設目前是head <-> A <-> B <-> tail
             Node node = new Node(key, value);//建立新節點:Node(3, 300)
